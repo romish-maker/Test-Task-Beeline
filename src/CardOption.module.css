@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    max-width: 1000px;
+    padding-top: 20px;
+    padding-left: 34px;
+}
+.options {
+    display: block;
+    margin-right: 35px;
+    font-size: 30px;
+    border: 1px solid grey;
+    padding: 20px;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.isSelected {
+    display: block;
+    margin-right: 35px;
+    font-size: 30px;
+    border: 1px solid gold;
+    padding: 20px;
+}
