@@ -12,6 +12,7 @@ export const initialMobileState = {
             {id: v1(), price: 1100, value: 200, title: 'минут'}
         ] as MobileValueType[],
     value: 0,
+    generallyValue: 0
 }
 
 type OptionState = typeof initialMobileState
@@ -21,6 +22,7 @@ export type MobileValueType = {
     price: number;
     value: number;
     title: string;
+    generallyValue: number
 }
 
 
@@ -29,7 +31,8 @@ export const mobileInternetReducer = (state: OptionState = initialMobileState, a
         case ACTION_MOBILE.SET_PRICE_MOBILE:
             return {
                 ...state,
-                value: action.value
+                value: action.value,
+                generallyValue: action.generallySum
             }
 
         default:
@@ -38,4 +41,4 @@ export const mobileInternetReducer = (state: OptionState = initialMobileState, a
 }
 export type setPrice = ReturnType<typeof setPriceForMobile>
 export type ActionType = setPrice
-export const setPriceForMobile = (value: number, id: string) => ({type: ACTION_MOBILE.SET_PRICE_MOBILE, value, id} as const)
+export const setPriceForMobile = (value: number, id: string, generallySum: number) => ({type: ACTION_MOBILE.SET_PRICE_MOBILE, value, id, generallySum} as const)

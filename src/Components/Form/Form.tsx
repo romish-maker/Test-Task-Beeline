@@ -1,16 +1,31 @@
 import styles from "./Form.module.css";
 import MaskedInput from "react-maskedinput";
 import React, {ChangeEvent, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../state/store";
+import {
+    handleChangeFormForName,
+    handleChangeFormForPhone,
+    handleChangeFormForUnicId
+} from "../../state/Reducers/formReducer";
 
 export const Form = () => {
 
-    const [name, setName] = useState<string>('');
-    const [phone, setPhone] = useState<string>('');
-    const [unicId, setUnicId] = useState<string>('');
+    // const [name, setName] = useState<string>('');
+    // const [phone, setPhone] = useState<string>('');
+    // const [unicId, setUnicId] = useState<string>('');
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setPhone(e.currentTarget.value)
-    const onChangeHandlerForId = (e: ChangeEvent<HTMLInputElement>) => setUnicId(e.currentTarget.value)
-    const onChangeHandlerForName = (e: ChangeEvent<HTMLInputElement>) => setName(e.currentTarget.value)
+    const name = useSelector<AppRootStateType, string>(state => state.form.name)
+    const phone = useSelector<AppRootStateType, string>(state => state.form.phone)
+    const unicId = useSelector<AppRootStateType, string>(state => state.form.unicId)
+
+    const dispatch = useDispatch()
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(handleChangeFormForPhone(e.currentTarget.value));
+    }
+    const onChangeHandlerForId = (e: ChangeEvent<HTMLInputElement>) => dispatch(handleChangeFormForUnicId(e.currentTarget.value))
+    const onChangeHandlerForName = (e: ChangeEvent<HTMLInputElement>) => dispatch(handleChangeFormForName(e.currentTarget.value))
 
     return <div className={styles.wrapper}>
         <form className={styles.formGroup}>

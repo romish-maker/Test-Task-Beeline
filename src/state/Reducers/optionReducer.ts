@@ -1,7 +1,8 @@
 import {v1} from "uuid";
 
-enum ACTION_OPTIONS {
-    SET_PRICE = 'optionReducer/SET_PRICE'
+export enum ACTION_OPTIONS {
+    SET_PRICE = 'optionReducer/SET_PRICE',
+    SET_PRICE_WITH_S = 'optionReducer/SET_PRICE_WITH_S'
 }
 export const initialOptionState = {
     optionValue:
@@ -11,7 +12,7 @@ export const initialOptionState = {
             {id: v1(), price: 3000, value: 30, title: 'гб'}
         ] as OptionValueType[],
     value: 0,
-    generallyValue: 2200
+    generallyValue: 0
 }
 
 export type OptionState = typeof initialOptionState
@@ -32,11 +33,18 @@ export const optionReducer = (state: OptionState = initialOptionState, action: A
                 value: action.value,
                 generallyValue: action.generallySum
             }
+        case ACTION_OPTIONS.SET_PRICE_WITH_S:
+            return {
+                ...state,
+                generallyValue: action.generallySumPlus
+            }
 
         default:
             return state;
     }
 }
 export type setPrice = ReturnType<typeof setPrice>
-export type ActionType = setPrice
+export type setPriceWithS = ReturnType<typeof setPriceWithS>
+export type ActionType = setPrice | setPriceWithS
 export const setPrice = (value: number, id: string, generallySum: number) => ({type: ACTION_OPTIONS.SET_PRICE, value, id, generallySum} as const)
+export const setPriceWithS = ( generallySumPlus: number) => ({type: ACTION_OPTIONS.SET_PRICE_WITH_S, generallySumPlus} as const)

@@ -8,19 +8,34 @@ import {setSummaryPrice} from "../../state/Reducers/mobileUnlimitedReducer";
 export const CardOption = () => {
     const [active, setActive] = useState<string | number>('')
 
-    const options = useSelector<AppRootStateType,OptionValueType[]>(state => state.option.optionValue)
+    const options = useSelector<AppRootStateType, OptionValueType[]>(state => state.option.optionValue)
     const value = useSelector<AppRootStateType, number>(state => state.option.value)
     const generallyValue = useSelector<AppRootStateType, number>(state => state.option.generallyValue)
     const valueOfMobileInternet = useSelector<AppRootStateType, number>(state => state.internet.value)
+    const generallyValueOfMobileInternet = useSelector<AppRootStateType, number>(state => state.internet.generallyValue)
+    const valueOfCardOption = useSelector<AppRootStateType, number>(state => state.option.value)
 
-    console.log(value);
     const dispatch = useDispatch()
 
-    const onClickHandler = (id: string, price:number) => {
-        const summarySum = valueOfMobileInternet && valueOfMobileInternet + value
-        dispatch(setSummaryPrice(id, summarySum))
-        dispatch(setPrice(price,id, summarySum))
-        setActive(id)
+    const onClickHandler = (id: string, price: number) => {
+        if (generallyValue === valueOfMobileInternet) {
+            const generallySum = generallyValue + price
+            dispatch(setSummaryPrice(id, generallySum))
+            dispatch(setPrice(price, id, generallySum))
+            setActive(id)
+        } else if (generallyValue === price) {
+            dispatch(setSummaryPrice(id, price))
+            dispatch(setPrice(price, id, price))
+            setActive(id)
+        } else if (price === valueOfCardOption) {
+            dispatch(setSummaryPrice(id, price))
+            dispatch(setPrice(price, id, price))
+            setActive(id)
+        } else {
+            dispatch(setSummaryPrice(id, price))
+            dispatch(setPrice(price, id, price))
+            setActive(id)
+        }
     }
     return (
         <div className={styles.header}>
@@ -31,7 +46,7 @@ export const CardOption = () => {
                         <div className={styles.container}>
                             <div
                                 className={isActiveClassName}
-                                onClick={() => onClickHandler(option.id,option.price)}
+                                onClick={() => onClickHandler(option.id, option.price)}
                             >
                                 <div>{option.value}</div>
                                 <span>{option.title}</span>
@@ -40,10 +55,8 @@ export const CardOption = () => {
                     </div>
                 )
             })}
-            {/*<div>PRICE:{value}</div>*/}
-            {/*<h1>PRICEforInternet{valueOfMobileInternet}</h1>*/}
-            <h1>{generallyValue}</h1>
+            <h1 className={styles.title}>{generallyValue}</h1>
         </div>
     );
-};
+}
 
