@@ -17,7 +17,6 @@ export const CardOption = () => {
     const dispatch = useDispatch()
 
     const onClickHandler = (id: string, price: number) => {
-        debugger;
         if (generallyValue === valueOfMobileInternet) {
             let generallySum = generallyValue + price;
             dispatch(setPrice(id, generallySum, price))
