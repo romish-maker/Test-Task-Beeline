@@ -14,6 +14,14 @@ export const ResultButton = () => {
     const phone = useSelector<AppRootStateType, string>(state => state.form.phone)
     const unicId = useSelector<AppRootStateType, string>(state => state.form.unicId)
 
+    const value = useSelector<AppRootStateType, number>(state => state.option.value)
+    const valueOfMobileInternet = useSelector<AppRootStateType, number>(state => state.internet.value)
+    const generallyValue = useSelector<AppRootStateType, number>(state => state.option.generallyValue)
+    const valueOfUnlimited = useSelector<AppRootStateType, number>(state => state.unlimited.value)
+
+
+
+
     const useStyles = makeStyles((theme: Theme) =>
         createStyles({
             modal: {
@@ -62,8 +70,12 @@ export const ResultButton = () => {
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <h2 id="transition-modal-title">{name} {phone} {unicId}</h2>
-                        <p id="transition-modal-description">Интернет, звонки, безлимит</p>
-                        <p id="transition-modal-paragraph">Цена: </p>
+                        <p id="transition-modal-description">
+                            Интернет: {value + 'тг'},
+                            звонки: {valueOfMobileInternet + 'тг'},
+                            безлимит: {valueOfUnlimited + 'тг'}
+                        </p>
+                        <p id="transition-modal-paragraph">Цена: {generallyValue + 'тг'}</p>
                     </div>
                 </Fade>
             </Modal>

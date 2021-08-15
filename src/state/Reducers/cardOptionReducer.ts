@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {ACTION_MOBILE, setSummaryPrice} from "./mobileUnlimitedReducer";
 
 export enum ACTION_OPTIONS {
     SET_PRICE = 'optionReducer/SET_PRICE',
@@ -25,18 +26,23 @@ export type OptionValueType = {
 }
 
 
-export const optionReducer = (state: OptionState = initialOptionState, action: ActionType) => {
+export const cardOptionReducer = (state: OptionState = initialOptionState, action: ActionType) => {
     switch (action.type) {
         case ACTION_OPTIONS.SET_PRICE:
             return {
                 ...state,
                 value: action.value,
-                generallyValue: action.generallySum
+                generallyValue: action.generallySum,
             }
         case ACTION_OPTIONS.SET_PRICE_WITH_S:
             return {
                 ...state,
-                generallyValue: action.generallySumPlus
+                generallyValue: action.generallySumPlus,
+            }
+            case ACTION_MOBILE.SET_SUMMARY_PRICE:
+            return {
+                ...state,
+                generallyValue: action.sumValue,
             }
 
         default:
@@ -45,6 +51,6 @@ export const optionReducer = (state: OptionState = initialOptionState, action: A
 }
 export type setPrice = ReturnType<typeof setPrice>
 export type setPriceWithS = ReturnType<typeof setPriceWithS>
-export type ActionType = setPrice | setPriceWithS
-export const setPrice = (value: number, id: string, generallySum: number) => ({type: ACTION_OPTIONS.SET_PRICE, value, id, generallySum} as const)
+export type ActionType = setPrice | setPriceWithS | setSummaryPrice
+export const setPrice = (id: string, generallySum: number, value: number) => ({type: ACTION_OPTIONS.SET_PRICE, value, id, generallySum} as const)
 export const setPriceWithS = ( generallySumPlus: number) => ({type: ACTION_OPTIONS.SET_PRICE_WITH_S, generallySumPlus} as const)
