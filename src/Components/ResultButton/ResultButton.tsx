@@ -69,13 +69,13 @@ export const ResultButton = () => {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2 id="transition-modal-title">{name} {phone} {unicId}</h2>
+                        <h2 id="transition-modal-title">Имя: {name} Телефон: {phone} ИИН: {unicId}</h2>
                         <p id="transition-modal-description">
                             Интернет: {value + 'тг'},
                             звонки: {valueOfMobileInternet + 'тг'},
                             безлимит: {valueOfUnlimited + 'тг'}
                         </p>
-                        <p id="transition-modal-paragraph">Цена: {generallyValue + 'тг'}</p>
+                        <p id="transition-modal-paragraph">Общая цена: {generallyValue + 'тг'}</p>
                     </div>
                 </Fade>
             </Modal>

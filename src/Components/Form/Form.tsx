@@ -1,6 +1,6 @@
 import styles from "./Form.module.css";
 import MaskedInput from "react-maskedinput";
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../state/store";
 import {
@@ -10,11 +10,6 @@ import {
 } from "../../state/Reducers/formReducer";
 
 export const Form = () => {
-
-    // const [name, setName] = useState<string>('');
-    // const [phone, setPhone] = useState<string>('');
-    // const [unicId, setUnicId] = useState<string>('');
-
     const name = useSelector<AppRootStateType, string>(state => state.form.name)
     const phone = useSelector<AppRootStateType, string>(state => state.form.phone)
     const unicId = useSelector<AppRootStateType, string>(state => state.form.unicId)
@@ -53,8 +48,5 @@ export const Form = () => {
                 value={phone}
             />
         </form>
-        <h1>{phone}</h1>
-        <h2>{unicId}</h2>
-        <h3>{name}</h3>
     </div>
 }
