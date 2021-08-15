@@ -9,7 +9,7 @@ export const CardOption = () => {
     const [active, setActive] = useState<string | number>('')
 
     const options = useSelector<AppRootStateType, OptionValueType[]>(state => state.option.optionValue)
-    const generallyValue = useSelector<AppRootStateType, number>(state => state.option.generallyValue)
+    let generallyValue = useSelector<AppRootStateType, number>(state => state.option.generallyValue)
     const valueOfMobileInternet = useSelector<AppRootStateType, number>(state => state.internet.value)
     const valueOfCardOption = useSelector<AppRootStateType, number>(state => state.option.value)
 
@@ -18,8 +18,8 @@ export const CardOption = () => {
 
     const onClickHandler = (id: string, price: number) => {
         if (generallyValue === valueOfMobileInternet) {
-            let generallySum = generallyValue + price;
-            dispatch(setPrice(id, generallySum, price))
+            generallyValue += price;
+            dispatch(setPrice(id, generallyValue, price))
             dispatch(setSummaryPrice(id, price))
             setActive(id)
         } else if (generallyValue === price) {
@@ -27,14 +27,14 @@ export const CardOption = () => {
             dispatch(setPrice(id, price, price))
             setActive(id)
         } else if (price === valueOfCardOption) {
-            let generallySum = valueOfMobileInternet + price;
-            dispatch(setSummaryPrice(id, generallySum))
-            dispatch(setPrice(id, generallySum, price))
+            generallyValue = valueOfMobileInternet + price;
+            dispatch(setSummaryPrice(id, generallyValue))
+            dispatch(setPrice(id, generallyValue, price))
             setActive(id)
         } else {
-            let generallySum = valueOfMobileInternet + price;
-            dispatch(setSummaryPrice(id, generallySum))
-            dispatch(setPrice(id, generallySum, price))
+            generallyValue = valueOfMobileInternet + price;
+            dispatch(setSummaryPrice(id, generallyValue))
+            dispatch(setPrice(id, generallyValue, price))
             setActive(id)
         }
     }

@@ -15,15 +15,13 @@ export const Unlimited = () => {
     const dispatch = useDispatch()
 
 
-    let generallySum;
     const toggleChecked = (checked: boolean, id: string, price: number) => {
-
         if (checked) {
-            generallyValue = generallyValue + price
+            generallyValue += price
             dispatch(setPrice(id, generallyValue, price))
             dispatch(setSummaryPrice(id, generallyValue))
         } else {
-            generallyValue = generallyValue - price
+            generallyValue -= price
             dispatch(setPrice(id, generallyValue, generallyValue))
             dispatch(setSummaryPrice(id, generallyValue))
         }
@@ -32,15 +30,15 @@ export const Unlimited = () => {
     const onChangeHandlerForCheckbox = () => {
         dispatch(setAllCheckbox())
         if (!checked) {
-            generallySum = generallyValue + 500
-            dispatch(setPriceWithS(generallySum))
+            generallyValue += 500
+            dispatch(setPriceWithS(generallyValue))
         } else {
-            generallySum = generallyValue - 500
-            dispatch(setPriceWithS(generallySum))
+            generallyValue -= 500
+            dispatch(setPriceWithS(generallyValue))
         }
 
     }
-//
+
     const checked = !unlimited.find(unl => !unl.checked);
 
     return (
