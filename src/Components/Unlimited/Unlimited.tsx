@@ -17,6 +17,7 @@ export const Unlimited = () => {
 
     let generallySum;
     const toggleChecked = (checked: boolean, id: string, price: number) => {
+        debugger;
         if (checked) {
             generallyValue = generallyValue + price
             dispatch(setPrice(id, generallyValue, price))
@@ -40,7 +41,7 @@ export const Unlimited = () => {
         }
 
     }
-
+//
     const checked = !unlimited.find(unl => !unl.checked);
 
     return (

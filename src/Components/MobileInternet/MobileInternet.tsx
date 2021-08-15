@@ -28,14 +28,17 @@ export const MobileInternet = () => {
             dispatch(setSummaryPrice(id, price))
             dispatch(setPriceForMobile(price, id, price))
             setActive(id)
-        }else if(valueOfCardOption === price) {
-            dispatch(setSummaryPrice(id, price))
-            setActive(id)
-        } else if (valueOfCardOption === price) {
+        } else if(valueOfCardOption === price) {
             dispatch(setSummaryPrice(id, price))
             dispatch(setPriceForMobile(price, id, price))
-        }else {
-            dispatch(setSummaryPrice(id, price))
+            setActive(id)
+        } else if(price){
+            generallyValue = valueOfCardOption +     price
+            dispatch(setSummaryPrice(id, generallyValue))
+            dispatch(setPriceForMobile(price, id, generallyValue))
+            setActive(id)
+        } else {
+            dispatch(setSummaryPrice(id, generallyValue))
             dispatch(setPriceForMobile(price, id, price))
             setActive(id)
         }

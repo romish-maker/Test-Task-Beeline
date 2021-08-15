@@ -28,12 +28,14 @@ export const CardOption = () => {
             dispatch(setPrice(id, price, price))
             setActive(id)
         } else if (price === valueOfCardOption) {
-            dispatch(setSummaryPrice(id, price))
-            dispatch(setPrice(id, price, price))
+            let generallySum = valueOfMobileInternet + price;
+            dispatch(setSummaryPrice(id, generallySum))
+            dispatch(setPrice(id, generallySum, price))
             setActive(id)
         } else {
-            dispatch(setSummaryPrice(id, price))
-            dispatch(setPrice(id, price, price))
+            let generallySum = valueOfMobileInternet + price;
+            dispatch(setSummaryPrice(id, generallySum))
+            dispatch(setPrice(id, generallySum, price))
             setActive(id)
         }
     }
